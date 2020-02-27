@@ -1,3 +1,23 @@
+<!-- <?php
+$target_dir = "uploads/";
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$uploadOk = 1;
+$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+// Check if image file is a actual image or fake image
+if(isset($_POST["submit"])) {
+    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    if($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
+    }
+}
+?> -->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -122,7 +142,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <br>
-                        <form action="process.php" method="POST">
+                        <form action="process.php" method="POST" enctype="multipart/form-data">
                             <h2 style="" class="wow bounceIn" data-wow-offset="50" data-wow-delay="0.3s">Client
                                 <span>Information</span></h2>
                             <input type="hidden" value="Client Information" name="client-info">
@@ -131,16 +151,16 @@
 
                         <div class="form-group">
                             <label class="label-form" for="name">Name:</label>
-                            <input type="name" name="name" quired maxlength="50" class="form-control" id="name" placeholder="Enter Name" name="name">
+                            <input type="name" name="name" required maxlength="50" class="form-control" id="name" placeholder="Enter Name" name="name">
                         </div>
 
                         <div class="form-group">
                             <label class="label-form" for="email">Email:</label>
-                            <input type="email" name="email" quired maxlength="50" class="form-control" id="email" placeholder="abc@abc.com" name="email">
+                            <input type="email" name="email" required maxlength="50" class="form-control" id="email" placeholder="abc@abc.com" name="email">
                         </div>
                         <div class="form-group">
                             <label class="label-form" for="pwd">Mobile:</label>
-                            <input type="mobile" name="mobile" quired maxlength="20" class="form-control" id="pwd" placeholder="Enter mobile no" name="mobile">
+                            <input type="mobile" name="mobile" required maxlength="20" class="form-control" id="pwd" placeholder="Enter mobile no" name="mobile">
                         </div>
                         <div class="col-md-12">
                             <h2 class="wow bounceIn" data-wow-offset="50" data-wow-delay="0.3s">Logo
@@ -174,7 +194,7 @@
                         <div class="form-group" style="">
                             <label class="label-form" for="Discription">Discription</label>
                             <input type="hidden" value="Discription" name="descript">
-                            <textarea class="form-control name=" discription" desc-limit" rows="10" id="Discription"></textarea>
+                            <textarea class="form-control" name="discriptionq" desc-limit" rows="10" id="Discription"></textarea>
                         </div>
                         <p class="tag-line">What types of products or services your company supplies, etc.?</p>
                         <!--descriptin-area-end-->
@@ -212,67 +232,67 @@
                             <!--col1-->
                             <div class="col-md-4 col-xs-6 wow fadeInLeft" data-wow-offset="50" data-wow-delay="0.6s">
                                 <label class="checkbox">
-                                    <input name="unique" type="checkbox" value="">Unique/Creative
+                                    <input name="effect_logo[]" type="checkbox" value="Unique/Creative">Unique/Creative
                                 </label>
                                 <label class="checkbox">
-                                    <input name="clean" type="checkbox" value="">Clean/Simple
+                                    <input name="effect_logo[]" type="checkbox" value="Clean/Simple">Clean/Simple
                                 </label>
                                 <label class="checkbox">
-                                    <input name="classy" type="checkbox" value="">Classy
-                                </label>
-
-                                <label class="checkbox">
-                                    <input name="professional" type="checkbox" value="">Professional
-                                </label>
-                                <label class="checkbox">
-                                    <input name="medical" type="checkbox" value="">Medical
-                                </label>
-                                <label class="checkbox">
-                                    <input name="luxurious" type="checkbox" value="">Luxurious
+                                    <input name="effect_logo[]" type="checkbox" value="Classy">Classy
                                 </label>
 
                                 <label class="checkbox">
-                                    <input name="industry" type="checkbox" value="">Industry Oriented
+                                    <input name="effect_logo[]" type="checkbox" value="Professional">Professional
                                 </label>
                                 <label class="checkbox">
-                                    <input name="corporate" type="checkbox" value="">Corporate
+                                    <input name="effect_logo[]" type="checkbox" value="Medical">Medical
                                 </label>
                                 <label class="checkbox">
-                                    <input name="modern" type="checkbox" value="">Modern
+                                    <input name="effect_logo[]" type="checkbox" value="Luxurious">Luxurious
+                                </label>
+
+                                <label class="checkbox">
+                                    <input name="effect_logo[]" type="checkbox" value="Industry Oriented">Industry Oriented
                                 </label>
                                 <label class="checkbox">
-                                    <input name="childlike" type="checkbox" value="">Childlike
+                                    <input name="effect_logo[]" type="checkbox" value="Corporate">Corporate
+                                </label>
+                                <label class="checkbox">
+                                    <input name="effect_logo[]" type="checkbox" value="Modern">Modern
+                                </label>
+                                <label class="checkbox">
+                                    <input name="effect_logo[]" type="checkbox" value="Childlike">Childlike
                                 </label>
                             </div>
                             <!--col2-->
                             <div class="col-xs-4 hidden-xs"></div>
                             <div class="col-md-4 col-xs-12">
                                 <label class="checkbox">
-                                    <input name="outdoors" type="checkbox" value="">Outdoors/Natural
+                                    <input name="effect_logo[]" type="checkbox" value="Outdoors/Natural">Outdoors/Natural
                                 </label>
                                 <label class="checkbox">
-                                    <input name="tech" type="checkbox" value="">High Tech
+                                    <input name="effect_logo[]" type="checkbox" value="High Tech">High Tech
                                 </label>
                                 <label class="checkbox">
-                                    <input name="retro" type="checkbox" value="">Retro
+                                    <input name="effect_logo[]" type="checkbox" value="Retro">Retro
                                 </label>
                                 <label class="checkbox">
-                                    <input name="fun" type="checkbox" value="">Fun
+                                    <input name="effect_logo[]" type="checkbox" value="Fun">Fun
                                 </label>
                                 <label class="checkbox">
-                                    <input name="serious" type="checkbox" value="">Serious
+                                    <input name="effect_logo[]" type="checkbox" value="Serious">Serious
                                 </label>
                                 <label class="checkbox">
-                                    <input name="illustrative" type="checkbox" value="">Illustrative
+                                    <input name="effect_logo[]" type="checkbox" value="Illustrative">Illustrative
                                 </label>
                                 <label class="checkbox">
-                                    <input name="silly" type="checkbox" value="">Silly/Cartoon
+                                    <input name="effect_logo[]" type="checkbox" value="Silly/Cartoon">Silly/Cartoon
                                 </label>
                                 <label class="checkbox">
-                                    <input name="masculine" type="checkbox" value="">Masculine
+                                    <input name="effect_logo[]" type="checkbox" value="Masculine">Masculine
                                 </label>
                                 <label class="checkbox">
-                                    <input name="feminine" type="checkbox" value="">Feminine
+                                    <input name="effect_logo[]" type="checkbox" value="Feminine">Feminine
                                 </label>
 
                             </div>
@@ -293,15 +313,33 @@
                         <br>
                         <p class="tag-line">Choose from this list of words and/or add your own.</p>
 
-                        <label class="checkbox">
-                            <input type="checkbox" name="symbol" value="">Symbol with font style.
+                        <!-- <label class="checkbox">
+                            <input type="radio"  name="symbol" value="option1">Symbol with font style.
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="nosymbol" value="">No Symbol Please. Just a Professional Font
+                            <input type="radio"  name="nosymbol" value="option2">No Symbol Please. Just a Professional Font
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="nausal" value="">Not Sure. Leave it to NAUSAL
-                        </label>
+                            <input type="radio"  name="nausal" value="option3">Not Sure. Leave it to NAUSAL
+                        </label> -->
+                        <div class="form-check" style="margin-top: 10px;">
+                            <input class="form-check-input" type="radio" name="symbol" id="exampleRadios1" value="Symbol with font style" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                            Symbol with font style.
+                            </label>
+                        </div>
+                        <div class="form-check" style="margin-top: 10px;">
+                            <input class="form-check-input" type="radio" name="symbol" id="exampleRadios2" value=" No Symbol Please. Just a Professional Font">
+                            <label class="form-check-label" for="exampleRadios2">
+                            No Symbol Please. Just a Professional Font
+                            </label>
+                        </div>
+                        <div class="form-check" style="margin-top: 10px;">
+                            <input class="form-check-input" type="radio" name="symbol" id="exampleRadios3" value=" Leave it to NAUSAL">
+                            <label class="form-check-label" for="exampleRadios3">
+                            Leave it to NAUSAL
+                            </label>
+                        </div>
                     </div>
 
                 </div>
@@ -351,8 +389,8 @@
                                         you dislike along with reasons why you dislike them</label>
                                     <input type="hidden" value="Dislike Logoes" name="dislike-logoes">
                                     <input type="hidden" value="Please provide 3 reference logos that you dislike along with reasons why you dislike them" name="logo-dislike-q">
-                                    <textarea name="logo-dislike" class="form-control reflimit" rows="10" id="Discription"></textarea><br>
-                                    <input type="file" name="logo-dislike" value="" class="">
+                                    <textarea name="logo-dislike-d" class="form-control reflimit" rows="10" id="Discription"></textarea><br>
+                                    <input type="file" name="logo-dislike[]" multiple class="">
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="label-form" for="Discription">Please provide 3 reference logos that
@@ -360,7 +398,7 @@
                                     <input type="hidden" value="Liked Logoes" name="liked-logoes">
                                     <textarea name="logo-like" class="form-control reflimit" rows="10" id="Discription"></textarea><br>
                                     <!-- <button type="button" class="btn btn-primary">Attachement</button> -->
-                                    <input type="file" name="logo-like" value="" class="">
+                                    <input type="file" name="logo-like-image" multiple value="" class="">
                                 </div>
                             </div>
                         </div>
@@ -391,19 +429,19 @@
                                     add your own.</p>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="corporate" value="">Corporate
+                                    <input type="checkbox" name="logo-type[]" value="Corporate">Corporate
                                 </label>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="script" value="">Script
+                                    <input type="checkbox" name="logo-type[]" value="Script">Script
                                 </label>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="bold" value="">Bold
+                                    <input type="checkbox" name="logo-type[]" value="Bold">Bold
                                 </label>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="light" value="">Light
+                                    <input type="checkbox" name="logo-type[]" value="Light">Light
                                 </label>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="fancy" value="">Fancy
+                                    <input type="checkbox" name="logo-type[]" value="Fancy">Fancy
                                 </label>
                             </div>
                             <!--font-detail-end-->
