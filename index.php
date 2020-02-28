@@ -309,7 +309,7 @@ if(isset($_POST["submit"])) {
                         <label style="font-size:25px;" class="label-form" for="check">Would you like a symbol or a
                             logotype?</label>
                         <input type="hidden" value="Would you like a symbol or a
-                            logotype?" name="logo-type">
+                            logotype?" name="logo-type-q">
                         <br>
                         <p class="tag-line">Choose from this list of words and/or add your own.</p>
 
@@ -398,7 +398,7 @@ if(isset($_POST["submit"])) {
                                     <input type="hidden" value="Liked Logoes" name="liked-logoes">
                                     <textarea name="logo-like" class="form-control reflimit" rows="10" id="Discription"></textarea><br>
                                     <!-- <button type="button" class="btn btn-primary">Attachement</button> -->
-                                    <input type="file" name="logo-like-image" multiple value="" class="">
+                                    <input type="file" name="logo-like-att[]" multiple value="" class="">
                                 </div>
                             </div>
                         </div>

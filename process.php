@@ -12,27 +12,29 @@ if (mysqli_connect_errno()) {
 }
 
 if (isset($_POST)) {
-        // echo '<pre>';
-        // print_r($_FILES);
- 
+
         $uploaddir = 'uploads/';
         $dislike_logos = $_FILES['logo-dislike']['name'];
-        // echo '<pre>';
-
-        // print_r($dislike_logos);
-
         $countfiles = sizeof($dislike_logos);
 
-        // $uploadfile = $uploaddir . basename($_FILES['logo-dislike']['name']);
-        // print_r();
-        // exit;
-        echo $countfiles;
-        for($i=0;$i<$countfiles;$i++){
-            echo $filename = $_FILES['logo-dislike']['name'][$i];
+        $countfiles;
+        $filenames = [];
+        for($i=0;$i<$countfiles;$i++) {
+            $filenames[] = $_FILES['logo-dislike']['tmp_name'][$i];
+            
+        }
 
-    $data = json_encode($_POST);
-    $data = mysqli_real_escape_string($con, $data);
-    $datetime = date('Y-m-d H:i:s');
+        $like_logos = $_FILES['logo-like-att'] ['name'];
+        $filesCount = sizeof($like_logos);;
+        $nameFiles = [];
+        for($i = 0; $i<$filesCount; $i++) {
+            $nameFiles[] = $_FILES['logo-like-att']['tmp_name'][$i];
+        }
+
+
+        $data = json_encode($_POST);
+        $data = mysqli_real_escape_string($con, $data);
+        $datetime = date('Y-m-d H:i:s');
 
     
     
@@ -67,13 +69,13 @@ if (isset($_POST)) {
     $dislikeLogoes = $_POST['dislike-logoes'];
     $logoDislikeq = $_POST['logo-dislike-q'];
     $logoDislike = $_POST['logo-dislike-d'];
-    $likedLogoes = $_POST['liked-logoes'];
     $logoLike = $_POST['logo-like'];
-    $logotype = $_POST['logotype'];
+    $logotype_q = $_POST['logo-type-q'];
     $effect_logo = $_POST['effect_logo'];
     $symbol = $_POST['symbol'];
     $symbol2 = $_POST['symbol2'];
     $symbol3 = $_POST['symbol3'];
+    $logo_like_att = $_POST['logo-like-att'];
     //check boxes
     $effect_logos = '';
     foreach ($effect_logo as $eff_logo) {
@@ -81,7 +83,7 @@ if (isset($_POST)) {
     }
 
     $logo_types = '';
-    foreach($logoes as $logo) {
+    foreach($logoType as $logo) {
         $logo_types .= $logo. ' - ';
     }
 
@@ -270,9 +272,10 @@ logotype?</label>
             
             <table class="table">
                 <tr>
-                    <td style="width:33%;"><img src="'.$uploadfile.'"></td>
-                    <td style="width:33%;">2</td>
-                    <td style="width:33%;">3</td>
+                    
+                    <td style="width:33%;"><img src="'.$filenames[0].'"></td>
+                    <td style="width:33%;"><img src="'.$filenames[1].'"></td>
+                    <td style="width:33%;"><img src="'.$filenames[2].'"></td>
                 </tr>
             </table>
         </div>
@@ -286,9 +289,9 @@ logotype?</label>
            </h4>
            <table class="table">
            <tr>
-               <td style="width:33%;"><img src="'.$uploadfile.'"></td>
-               <td style="width:33%;">2</td>
-               <td style="width:33%;">3</td>
+               <td style="width:33%;"><img src="'. $nameFiles[0].'"></td>
+               <td style="width:33%;"><img src="'. $nameFiles[1].'"></td>
+               <td style="width:33%;"><img src="'. $nameFiles[2].'"></td>
            </tr>
        </table>
         </div>
@@ -307,7 +310,7 @@ logotype?</label>
 </section>
 <!--chekedlist--end--><br><br>
 <section>
-<div style="float: left;width: 100%;background: #202020;">
+<div style="float: left;width: 100%;">
 <div class="container">
 <div class="row">
 <div class="col-xs-12">
@@ -336,11 +339,30 @@ logotype?</label>
 </div>
 </div>
 </div>
-<div class="text-center">
-<br><br><span><button type="submit" class="btn btn-primary btn-lg">submit</button> </span><span><button type="button" class="btn btn-primary btn-lg">Download</button> </span>
-</div><br><br>
+
 </form>
     ');
+    $file_name = time()."_attachment.pdf";
+    $content = $mpdf->Output('attachments/'.$file_name,'F');
 
-    $mpdf->Output();
-}};
+    // Send Email 
+    // Create instance of Swift_Attachment with our PDF file
+    $attachment = new Swift_Attachment('$attachments/'.$file_name, 'attachment.pdf', 'application/pdf');
+
+    $message = Swift_Message::newInstance()
+    ->setSubject('Your subject')
+    ->setFrom(array('john@doe.com' => 'John Doe'))
+    ->setTo(array('receiver@domain.org', 'other@domain.org' => 'A name'))
+    ->setBody('Here is the message itself')
+    ->attach($attachment);
+
+    $transport = Swift_MailTransport::newInstance();
+
+    // Create the Mailer using your created Transport
+    $mailer = Swift_Mailer::newInstance($transport);
+
+    // Send the created message
+    $mailer->send($message);
+
+
+};
