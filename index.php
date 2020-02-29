@@ -1,20 +1,6 @@
-<!-- <?php
-$target_dir = "uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
-    }
-}
-?> -->
+ <?php
+require_once __DIR__ . '/vendor/autoload.php';
+?> 
 
 
 
@@ -453,7 +439,8 @@ if(isset($_POST["submit"])) {
                 </div>
             </div>
             <div class="text-center">
-                <br><br><span><button type="submit" class="btn btn-primary btn-lg">submit</button> </span><span><button type="button" class="btn btn-primary btn-lg">Download</button> </span>
+                <br><br><span><button type="submit" class="btn btn-primary btn-lg" name="submit">submit</button> </span><span>
+                <button type="submit" name="download" class="btn btn-primary btn-lg">Download</button> </span>
             </div><br><br>
             </form>
         </div>
@@ -827,8 +814,8 @@ if(isset($_POST["submit"])) {
                         <span> 21 E 3rd Floor, Huma Plaza, Fazal e Haq Road، China Chowk Underpass, G 6/2 Blue Area, Islamabad, Islamabad Capital Territory 46000</span>
                         <p><i class="fa fa-phone"></i>+92 0300 293 7444</p>
                         <p><i class="fa fa-envelope-o"></i>contact@viralwebbs.com</p>
-                        <p><i class="fa fa-map-marker"></i> 21 E 3rd Floor, Huma Plaza, Fazal e Haq Road، China Chowk
-                            Underpass, G 6/2 Blue Area, Islamabad, Islamabad Capital Territory 46000</p>
+                        <!-- <p><i class="fa fa-map-marker"></i> 21 E 3rd Floor, Huma Plaza, Fazal e Haq Road، China Chowk
+                            Underpass, G 6/2 Blue Area, Islamabad, Islamabad Capital Territory 46000</p> -->
 
                     </address>
                     <ul class="social-icon">
